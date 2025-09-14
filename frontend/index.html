@@ -8,8 +8,11 @@
 </head>
 <body>
     <form id="register-form">
-        <i class="fas fa-paw paw-icon"></i>
-        <h1>Cadastre-se na Pet Care!</h1>
+        <div class="icon-container">
+  <i class="fas fa-paw paw-icon"></i>
+</div>
+        <h1>Cadastre-se na Pet Care</h1>
+        <p>Organize as vacinas do seu pet de forma fácil e prática!</p>
         <input type="text" id="name" placeholder="Nome" required>
         <input type="email" id="email" placeholder="Email" required>
         <input type="password" id="password" placeholder="Senha" required>
@@ -30,13 +33,12 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, password })
                 });
+                     console.log(res.status, await res.text());
 
-                const data = await res.json();
-                alert(data.message || data.error);
 
                 if (res.ok) {
                     // Redireciona para a página inicial
-                    window.location.href = 'home.html';  // Coloque o caminho da sua página inicial
+                    window.location.href = 'home.html';  // 
                 }
 
             } catch (err) {
