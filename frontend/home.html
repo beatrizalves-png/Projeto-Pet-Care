@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial - Pet Care</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4c0059 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .logo {
+            font-size: 4rem;
+            color: #dbc6db;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #dbc6db;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-box {
+            background: #dbc6db;
+            padding: 60px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-box h2 {
+            color: #4a0953;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .welcome-box p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #e8e5e8;
+            padding: 30px;
+            border-radius: 48px;
+            border-left: 6px solid #5a0454;
+            text-align: left;
+        }
+
+        .feature-card h3 {
+            color: #4a0953;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            color: #dbc6db;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .features {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .feature-card {
+                flex: 1;
+                min-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-paw"></i>
+            </div>
+            <h1>Bem-vindo ao Pet Care!</h1>
+        </header>
+
+        <div class="welcome-box">
+            <h2>Cuide do seu melhor amigo</h2>
+            <p>O Pet Care é a solução completa para gerenciar a saúde e o bem-estar do seu animal de estimação. Tenha todas as informações importantes sempre à mão.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Cadastre o seu Pet!</h3>
+                    <p>Adicione e gerencie as informações básicas do seu animal de estimação.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Registro de vacinas</h3>
+                    <p>Controle o calendário vacinal do seu pet com lembretes de próximas doses e datas de reforço.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Registro de tratamentos</h3>
+                    <p>Acompanhe todos os tratamentos médicos, medicamentos administrados e procedimentos realizados.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Pet Care. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>

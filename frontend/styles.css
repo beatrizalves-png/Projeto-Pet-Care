@@ -1,0 +1,146 @@
+/* styles.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #400266 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+h1 {
+  color: rgb(66, 11, 82);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#register-form {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  backdrop-filter: blur(10px);
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 1.2rem;
+  border: 2px solid #e1e1e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+input::placeholder {
+  color: #999;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #310037 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(65, 0, 80, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  #register-form {
+    padding: 2rem;
+  }
+  
+  input, button {
+    padding: 12px;
+  }
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#register-form {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Estados de validação */
+input:invalid:not(:placeholder-shown) {
+  border-color: #ff4757;
+}
+
+input:valid:not(:placeholder-shown) {
+  border-color: #2ed573;
+}
+
+/* Loading state */
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.paw-icon {
+  display: block;         /* Faz o ícone se comportar como bloco */
+  font-size: 3rem;        /* Tamanho da pata */
+  color: #ffcc00;         /* Cor da pata */
+  text-align: center;     /* Centraliza horizontalmente */
+  margin: 0 auto 1rem;    /* Centraliza e dá espaço embaixo */
+  animation: bounce 1s infinite alternate; /* Animação opcional */
+}
+
+/* Pequena animação divertida */
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}

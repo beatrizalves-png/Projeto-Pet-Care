@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>Pet Care-Cadastro</title>
+</head>
+<body>
+    <form id="register-form">
+        <i class="fas fa-paw paw-icon"></i>
+        <h1>Cadastre-se na Pet Care!</h1>
+        <input type="text" id="name" placeholder="Nome" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch('http://localhost:4000/register', {  // Porta 4000
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await res.json();
+                alert(data.message || data.error);
+
+                if (res.ok) {
+                    // Redireciona para a página inicial
+                    window.location.href = 'home.html';  // Coloque o caminho da sua página inicial
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert('Ocorreu um erro ao cadastrar.');
+            }
+        });
+    </script>
+</body>
+</html>
