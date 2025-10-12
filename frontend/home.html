@@ -27,7 +27,7 @@
 
         header {
             text-align: center;
-            padding: 40px 0;
+            padding: 20px 0;
         }
 
         .logo {
@@ -77,15 +77,20 @@
 
         .feature-card {
             background: #e8e5e8;
-            padding: 30px;
+            padding: 20px;
             border-radius: 48px;
-            border-left: 6px solid #5a0454;
+            border-left: 15px solid #5a0454;
             text-align: left;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
         .feature-card h3 {
             color: #4a0953;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-size: 1.5rem;
         }
 
@@ -93,6 +98,94 @@
             color: #666;
             font-size: 16px;
             line-height: 1.6;
+        }
+        
+        .feature-card:hover {
+            transform: scale(1.03);
+        }
+
+        /* Estilos para a seção de pets */
+        .pets-section {
+            background: #dbc6db;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .pets-section h2 {
+            color: #4a0953;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .pet-card {
+            background: #e8e5e8;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border-left: 8px solid #5a0454;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pet-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #8A2BE2, #9370DB);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 28px;
+        }
+
+        .pet-name {
+            color: #4a0953;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pet-details {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .no-pets {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            font-size: 18px;
+        }
+
+        .no-pets i {
+            font-size: 48px;
+            color: #b8b8b8;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            font-size: 16px;
         }
 
         footer {
@@ -110,7 +203,21 @@
             
             .feature-card {
                 flex: 1;
-                min-width: 300px;
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pets-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-box {
+                padding: 40px 20px;
+            }
+            
+            .pets-section {
+                padding: 30px 20px;
             }
         }
     </style>
@@ -127,26 +234,133 @@
         <div class="welcome-box">
             <h2>Cuide do seu melhor amigo</h2>
             <p>O Pet Care é a solução completa para gerenciar a saúde e o bem-estar do seu animal de estimação. Tenha todas as informações importantes sempre à mão.</p>
-            
+
             <div class="features">
-                <div class="feature-card">
+                <a href="cadastropet.html" class="feature-card">
                     <h3>Cadastre o seu Pet!</h3>
                     <p>Adicione e gerencie as informações básicas do seu animal de estimação.</p>
-                </div>
+                </a>
+
                 <div class="feature-card">
                     <h3>Registro de vacinas</h3>
                     <p>Controle o calendário vacinal do seu pet com lembretes de próximas doses e datas de reforço.</p>
                 </div>
+
                 <div class="feature-card">
                     <h3>Registro de tratamentos</h3>
                     <p>Acompanhe todos os tratamentos médicos, medicamentos administrados e procedimentos realizados.</p>
                 </div>
             </div>
+                  <!-- Seção de Pets Cadastrados -->
+        <div class="pets-section">
+            <h2>Meus Pets</h2>
+            <div id="pets-container" class="loading">
+                <p><i class="fas fa-spinner fa-spin"></i> Carregando seus pets...</p>
+            </div>
+        </div>
         </div>
 
         <footer>
             <p>© 2025 Pet Care. Todos os direitos reservados.</p>
         </footer>
     </div>
+
+    <script>
+        // URL do backend - CORRIGIDA
+        const BACKEND_URL = 'http://localhost:4000';
+
+        // Função para determinar o ícone do pet baseado na espécie
+        function getPetIcon(species) {
+            if (!species) return 'fa-paw';
+            
+            const speciesLower = species.toLowerCase();
+            if (speciesLower.includes('gato') || speciesLower.includes('cat')) {
+                return 'fa-cat';
+            } else if (speciesLower.includes('cão') || speciesLower.includes('cachorro') || speciesLower.includes('dog')) {
+                return 'fa-dog';
+            } else if (speciesLower.includes('pássaro') || speciesLower.includes('ave') || speciesLower.includes('bird')) {
+                return 'fa-dove';
+            } else if (speciesLower.includes('peixe') || speciesLower.includes('fish')) {
+                return 'fa-fish';
+            } else if (speciesLower.includes('coelho') || speciesLower.includes('rabbit')) {
+                return 'fa-rabbit';
+            } else if (speciesLower.includes('hamster') || speciesLower.includes('roedor')) {
+                return 'fa-otter';
+            } else if (speciesLower.includes('macaco')) {
+                return 'fa-monkey';
+            } else {
+                return 'fa-paw';
+            }
+        }
+
+        // Função para carregar e exibir os pets
+        async function loadPets() {
+            const petsContainer = document.getElementById('pets-container');
+            
+            try {
+                console.log('🔍 Buscando pets de:', `${BACKEND_URL}/pets`);
+                
+                const response = await fetch(`${BACKEND_URL}/pets`);
+                
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+                
+                const pets = await response.json();
+                console.log('✅ Pets recebidos:', pets);
+                
+                if (pets.length === 0) {
+                    petsContainer.innerHTML = `
+                        <div class="no-pets">
+                            <i class="fas fa-paw"></i>
+                            <p>Nenhum pet cadastrado ainda</p>
+                            <p>Clique em "Cadastre o seu Pet!" para adicionar seu primeiro amiguinho!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Ordena os pets por nome
+                const sortedPets = pets.sort((a, b) => {
+                    const nameA = (a.petName || '').toLowerCase();
+                    const nameB = (b.petName || '').toLowerCase();
+                    return nameA.localeCompare(nameB);
+                });
+                
+                petsContainer.innerHTML = `
+                    <div class="pets-grid">
+                        ${sortedPets.map(pet => `
+                            <div class="pet-card">
+                                <div class="pet-icon">
+                                    <i class="fas ${getPetIcon(pet.species)}"></i>
+                                </div>
+                                <div class="pet-name">${pet.petName || 'Sem nome'}</div>
+                                <div class="pet-details">
+                                    <strong>Espécie:</strong> ${pet.species || 'Não informada'}<br>
+                                    <strong>Raça:</strong> ${pet.breed || 'Não informada'}<br>
+                                    <strong>Idade:</strong> ${pet.age || '0'} ano(s)<br>
+                                    <strong>Sexo:</strong> ${pet.gender || 'Não informado'}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('❌ Erro ao carregar pets:', error);
+                petsContainer.innerHTML = `
+                    <div class="no-pets">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Erro ao carregar os pets</p>
+                        <p>Tente recarregar a página</p>
+                        <small>Detalhes: ${error.message}</small>
+                    </div>
+                `;
+            }
+        }
+
+        // Carrega os pets quando a página é carregada
+        document.addEventListener('DOMContentLoaded', loadPets);
+    </script>
 </body>
 </html>
